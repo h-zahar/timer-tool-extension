@@ -16,5 +16,6 @@
     },
     "default_title": "Timer Tool",
     "default_popup": "popup.html"
-  }
+  },
+  "options_page": "options.html"
 }
