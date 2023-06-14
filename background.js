@@ -5,7 +5,7 @@ chrome.alarms.create({
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
-  const st = chrome.storage.local.get(["state"], (data) => {
+  chrome.storage.local.get(["state"], (data) => {
     if (data.state === "STOP" || data.state === "PAUSE") return;
 
     chrome.storage.local.get(["timer"], (data) => {
