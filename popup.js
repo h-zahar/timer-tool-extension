@@ -4,6 +4,12 @@ const nameElem = document.getElementById("name");
 
 const timerElem = document.getElementById("timer");
 
+const stopElem = document.getElementById("btn-stop");
+
+const playElem = document.getElementById("btn-play");
+
+const pauseElem = document.getElementById("btn-pause");
+
 const updateTime = () => {
   const currTime = new Date().toLocaleTimeString();
   //     .split(" ")[0]
@@ -33,3 +39,17 @@ const updateTimer = () => {
 
 updateTimer();
 setInterval(updateTimer, 100);
+
+stopElem.addEventListener("click", () => {
+  chrome.storage.local.set({ state: "STOP" });
+  chrome.storage.local.set({ timer: 0 });
+  chrome.action.setBadgeText({ text: "" });
+});
+
+playElem.addEventListener("click", () => {
+  chrome.storage.local.set({ state: "PLAY" });
+});
+
+pauseElem.addEventListener("click", () => {
+  chrome.storage.local.set({ state: "PAUSE" });
+});
