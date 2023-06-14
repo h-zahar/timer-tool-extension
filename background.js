@@ -9,5 +9,12 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     chrome.storage.local.set({ timer: time + 1 });
 
     chrome.action.setBadgeText({ text: `${time + 1}` });
+
+    if (time % 60 === 0) {
+      this.registration.showNotification("Timer", {
+        body: `${Math.floor(time / 60)} minutes passed!`,
+        icon: "icon.png",
+      });
+    }
   });
 });
