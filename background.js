@@ -1,6 +1,13 @@
-let time = 0;
+chrome.alarms.create({
+  periodInMinutes: 1 / 60,
+});
 
-setInterval(() => {
-  time++;
-  console.log(time);
-}, 1000);
+chrome.alarms.onAlarm.addListener((alarm) => {
+  chrome.storage.local.get(["timer"], (data) => {
+    const time = data.timer ? data.timer : 0;
+
+    chrome.storage.local.set({ timer: time + 1 });
+
+    chrome.action.setBadgeText({ text: `${time + 1}` });
+  });
+});
